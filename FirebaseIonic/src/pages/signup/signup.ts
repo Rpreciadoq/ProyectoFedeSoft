@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { AngularFireAuth } from 'angularfire2/auth';
+//import { AngularFireAuth } from 'angularfire2/auth';
+import { Authentication } from '../../services/authentication';
 
 /**
  * Generated class for the SignupPage page.
@@ -23,8 +24,9 @@ export class SignupPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    //inyeccion de dependencia
-    private angularFire : AngularFireAuth
+    private auth: Authentication
+    
+    //private angularFire : AngularFireAuth
   ) {
   }
 
@@ -33,7 +35,13 @@ export class SignupPage {
   }
 
   createAccount() {
-    this.angularFire.auth.createUserWithEmailAndPassword(this.email, this.password);
+    this.auth.createUserWithEmailAndPassword(this.email, this.password);
+  }
+  createAccountWithGoogle(){
+    this.auth.crearUsuarioGoogle();
   }
 
+  createAccountWithFacebook(){
+    this.auth.crearUsuarioFacebook();
+  }
 }
